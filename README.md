@@ -1,20 +1,17 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# بايثون أكاديمي — نسخة النشر
 
-# Run and deploy your AI Studio app
+## النشر على Render
+1. ارفع محتويات هذا المجلد إلى مستودع GitHub.
+2. في Render اختر **New → Blueprint** واربط المستودع، أو أنشئ **Web Service** واختر المستودع.
+3. استخدم إعدادات `render.yaml` الموجودة في جذر المشروع.
+4. في إعدادات الخدمة على Render أضف متغير البيئة `GEMINI_API_KEY` وضع فيه مفتاح Gemini API الخاص بك. لا تضع المفتاح داخل ملفات المشروع ولا ترفعه إلى GitHub.
+5. ابدأ النشر. أمر البناء هو `npm install --include=dev && npm run build` وأمر التشغيل `npm start`.
 
-This contains everything you need to run your app locally.
+## تنبيه بخصوص Firebase وGoogle Drive
+المشروع يحتوي على `firebase-applet-config.json`، وهو إعداد عميل Firebase الذي يستخدمه التطبيق. وجود Firebase Web API key في هذا الملف أمر معتاد في تطبيقات الويب، لكنه ليس بديلًا عن تأمين Firebase Security Rules.
+بعد ظهور نطاق Render (مثل `اسم-الخدمة.onrender.com`)، أضفه إلى **Authorized domains** في إعدادات Firebase Authentication، وراجع إعدادات OAuth/Google Drive المسموح بها في Google Cloud إذا كنت تستخدم ميزة Drive.
 
-View your app in AI Studio: https://ai.studio/apps/534620fa-7851-46b0-be0e-0cee496ed923
-
-## Run Locally
-
-**Prerequisites:**  Node.js
-
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## ملاحظات
+- تم استبعاد مجلد `.aistudio` لأنه يحتوي على سجلات وملفات عمل داخلية غير مطلوبة لتشغيل الموقع.
+- تم الإبقاء على ملفات `src` و`public` وملفات PDF المستخدمة داخل الموقع.
+- لا ترفع ملفات `.env` أو مفاتيح API أو أسرار OAuth إلى مستودع عام.
